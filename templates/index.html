@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Traffic Simulation</title>
+    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="stylesheet" href="../static/elem.css" />
+  </head>
+  <body>
+    <div class="viewport">
+      <div class="map">
+        <div class="base">
+          <div class="top-section">
+            <div class="grass top-left">
+              <div class="traffic-light-container" id="ts1">
+                <div class="traffic-light-counter" id="tsc1">--</div>
+                <div class="frame">
+                  <div class="light red"></div>
+                  <div class="light yellow"></div>
+                  <div class="light green"></div>
+                </div>
+              </div>
+            </div>
+            <div class="road road-top vertical"></div>
+            <div class="grass top-right">
+              <div class="traffic-light-container" id="ts2">
+                <div class="traffic-light-counter" id="tsc2">--</div>
+                <div class="frame">
+                  <div class="light red"></div>
+                  <div class="light yellow"></div>
+                  <div class="light green"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="middle-section">
+            <div class="road road-left horizontal"></div>
+            <div class="road junction"></div>
+            <div class="road road-right horizontal"></div>
+          </div>
+          <div class="bottom-section">
+            <div class="grass bottom-left">
+              <div class="traffic-light-container" id="ts0">
+                <div class="traffic-light-counter" id="tsc0">--</div>
+                <div class="frame">
+                  <div class="light red"></div>
+                  <div class="light yellow"></div>
+                  <div class="light green"></div>
+                </div>
+              </div>
+            </div>
+            <div class="road road-bottom vertical"></div>
+            <div class="grass bottom-right">
+              <div class="traffic-light-container" id="ts3">
+                <div class="traffic-light-counter" id="tsc3">--</div>
+                <div class="frame">
+                  <div class="light red"></div>
+                  <div class="light yellow"></div>
+                  <div class="light green"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mapElem">
+        <div class="track vertical" id="t0"></div>
+          <div class="track vertical" id="t1"></div>
+          <div class="track vertical" id="t2"></div>
+          <div class="track vertical" id="t3"></div>
+  
+          <div class="track horizontal" id="t4"></div>
+          <div class="track horizontal" id="t5"></div>
+          <div class="track horizontal" id="t6"></div>
+          <div class="track horizontal" id="t7"></div>
+        </div>
+      </div>
+      <div class="info">
+        <div class="container">
+          <h4><strong>Status: </strong> <p id="status">Vehicle Not Detected</p></h4>
+        </div>
+      </div>
+    </div>
+
+    <script src="../static/script.js"></script>
+  </body>
+</html>
