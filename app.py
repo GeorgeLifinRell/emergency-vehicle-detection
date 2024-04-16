@@ -5,7 +5,8 @@ import numpy as np
 import librosa
 
 # Defining model path
-model_path = 'models/lstm_model.h5'
+model_path = '/models/Best Model.h5'
+model = None
 try:
     model = load_model(model_path)
     print("Model loaded successfully.")
@@ -13,7 +14,7 @@ except Exception as e:
     print("Error loading the model:", e)
 
 # Audio file path
-audio_file_path = './audio_files/fileName.mp3'
+audio_file_path = 'audio_files/Emergency audio.wav'
 
 def features_extractor(file_name):
     audio, sample_rate = librosa.load(file_name, res_type='kaiser_fast')
@@ -39,12 +40,17 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/ambulance', methods=['GET', 'POST'])
 def ambulance_generated():
-    if request.method == 'POST':
+    global model
+    emergency_vehicle_detected = None
+    if model is not None:
         emergency_vehicle_detected = test_audio_lstm(audio_file_path=audio_file_path, model=model)
-        return jsonify({'emergency_vehicle_detected': emergency_vehicle_detected})
-    return render_template('index.html')
+    else:
+        print("Model not loaded!")
+    print(emergency_vehicle_detected)
+    # emergency_vehicle_detected = 'Emergency'
+    return jsonify({'emergency_vehicle_detected': emergency_vehicle_detected})
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -78,26 +78,21 @@ async function createVehicle(mode, option1) {
   prevVehicle[trackId] = img.id
 
   if (mode==1){
-    // changeDetectionStatus()
     let detected = false
-    detected = await fetch("/")
-    .then((data) => {
-      console.log(JSON.stringify(data.json))
-    })
-    .catch(e => {
-      console.log(e)
-    })
-    if(detected == true){
-      changeDetectionStatus()
-    }
+    await fetch('/ambulance')
+    .then(async (res) => await res.json().then((data) => {
+      console.log(data)
+      setTimeout(() => {
+        changeDetectionStatus(data.emergency_vehicle_detected, 'green')
+      }, 3000);
+    }))
   }
 }
 
-function changeDetectionStatus(){
-  console.log('sts');
+function changeDetectionStatus(responseString , color){
   let sts = document.querySelector(".info .container #status")
-  sts.innerHTML = "Ambulance Detected"
-  sts.style.color = 'green'
+  sts.innerHTML = responseString
+  sts.style.color = color
   return 1 , 2
 }
 
@@ -278,6 +273,9 @@ function animateVehicle(id, vehicleType, direction, prevVehicleId, duration, tra
         }
         if (trafficPassed && v.getBoundingClientRect().y - mapOffsetY < -30) {
           v.remove()
+          if (vehicleType == 4){
+          changeDetectionStatus('No Emergency', 'red')
+          }
         }
         break
 
@@ -347,7 +345,6 @@ function animateVehicle(id, vehicleType, direction, prevVehicleId, duration, tra
 
 setTimeout(() => {
 createVehicle(1, 'up')
-  
 }, 1500);
 // createVehicle(1, 'up')
 // createVehicle(1, 'up')
@@ -381,3 +378,9 @@ createVehicle(0)
 setInterval(() => {
   createVehicle(0)
 }, 15000)
+
+// setInterval(() => {
+//   let directions = ['up', 'right', 'down', 'left']
+  
+//   createVehicle(1, directions[Math.random * 3])
+// }, 15000);
