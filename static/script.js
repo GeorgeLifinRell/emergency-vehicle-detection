@@ -81,6 +81,12 @@ async function createVehicle(mode, option1) {
     // changeDetectionStatus()
     let detected = false
     detected = await fetch("/")
+    .then((data) => {
+      console.log(JSON.stringify(data.json))
+    })
+    .catch(e => {
+      console.log(e)
+    })
     if(detected == true){
       changeDetectionStatus()
     }
@@ -339,8 +345,10 @@ function animateVehicle(id, vehicleType, direction, prevVehicleId, duration, tra
   animationId = requestAnimationFrame(updatePosition)
 }
 
-
+setTimeout(() => {
 createVehicle(1, 'up')
+  
+}, 1500);
 // createVehicle(1, 'up')
 // createVehicle(1, 'up')
 // createVehicle(1, 'up')
