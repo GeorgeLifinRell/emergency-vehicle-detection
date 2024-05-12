@@ -9,6 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-size: cover;
         }
         .navbar {
             background-color: #333;
@@ -28,40 +29,76 @@
             color: black;
         }
         .main-content {
-            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            padding: 300px;
+        }
+        .main-content h1 {
+            color: #3b719f;
         }
         .buttons {
             text-align: center;
             margin-top: 20px;
         }
-        .buttons button {
-            padding: 10px 20px;
-            margin: 0 10px;
-            font-size: 16px;
-            cursor: pointer;
+        button {
+  /* Variables */
+        --button_radius: 0.75em;
+        --button_color: #e8e8e8;
+        --button_outline_color: #000000;
+        font-size: 17px;
+        font-weight: bold;
+        border: none;
+        border-radius: var(--button_radius);
+        background: var(--button_outline_color);
         }
-        .buttons button:hover {
-            background-color: #ddd;
+
+        .button_top {
+        display: block;
+        box-sizing: border-box;
+        border: 2px solid var(--button_outline_color);
+        border-radius: var(--button_radius);
+        padding: 0.75em 1.5em;
+        background: var(--button_color);
+        color: var(--button_outline_color);
+        transform: translateY(-0.2em);
+        transition: transform 0.1s ease;
+        }
+
+        button:hover .button_top {
+        /* Pull the button upwards when hovered */
+        transform: translateY(-0.33em);
+        }
+
+        button:active .button_top {
+        /* Push the button downwards when pressed */
+        transform: translateY(0);
         }
     </style>
 </head>
-<body>
-    <div class="navbar">
+<body background="../static/bg-image.jpg">
+    <!-- <div class="navbar">
         <a href="#">Home</a>
         <a href="/audio">Audio Analysis</a>
         <a href="/video">Video Analysis</a>
-    </div>
+    </div> -->
     
     <div class="main-content">
         <div>
             <h1>Emergency Vehicle Detection Project</h1>
-            <p>This project utilizes audio and video machine learning models for detecting emergency vehicles.</p>
+            <p style="padding-left: 50px; padding-right: 50px;">I have integrated a LSTM audio model to detect emergency vehicle audio and an Yolo V9 object detection model integrated with DeepSORT to detect and track the movement of emergency vehicle. After the tracking the distance and the speed of the vehicle is observed and the necessary time to cross the traffic light will be generated.</p>
         </div>
     
         <div class="buttons">
-            <a href="/audio"><button>Audio Analysis</button></a>
-            <a href="/video"><button>Video Analysis</button></a>
+            <a href="/audio">
+                <button>
+                <span class="button_top"> Audio Analysis </span>
+              </button></a>
+            <a href="/video">
+                <button>
+                <span class="button_top"> Video Analysis </span>
+              </button></a>
         </div>
+            
     </div>
 </body>
 </html>

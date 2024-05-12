@@ -3,3 +3,4 @@ audio_files
 video
 output.avi
 detected_frames
+__pycache__
