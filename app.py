@@ -4,6 +4,9 @@ from sklearn.preprocessing import LabelEncoder
 import numpy as np
 import librosa
 
+# Importing Local files
+from tracker import video_analysis
+
 # Defining model path
 model_path = '/models/Best Model.h5'
 model = None
@@ -38,6 +41,15 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
+    return render_template('home.html')
+
+@app.route('/audio')
+def audio_simulation():
+    return render_template('index.html')
+
+@app.route('/video')
+def video_simulation():
+    video_analysis()
     return render_template('index.html')
 
 @app.route('/ambulance', methods=['GET', 'POST'])
@@ -49,8 +61,10 @@ def ambulance_generated():
     else:
         print("Model not loaded!")
     print(emergency_vehicle_detected)
+    time_to_be_added = 10
     # emergency_vehicle_detected = 'Emergency'
-    return jsonify({'emergency_vehicle_detected': emergency_vehicle_detected})
+    return jsonify({'emergency_vehicle_detected': emergency_vehicle_detected,
+                    'time_to_be_added': time_to_be_added})
 
 if __name__ == '__main__':
     app.run(debug=True)

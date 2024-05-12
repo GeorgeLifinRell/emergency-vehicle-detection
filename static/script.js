@@ -83,17 +83,21 @@ async function createVehicle(mode, option1) {
     .then(async (res) => await res.json().then((data) => {
       console.log(data)
       setTimeout(() => {
-        changeDetectionStatus(data.emergency_vehicle_detected, 'green')
+        changeDetectionStatus(data.emergency_vehicle_detected, data.time_to_be_added, 'green')
       }, 3000);
     }))
   }
 }
 
-function changeDetectionStatus(responseString , color){
+function changeDetectionStatus(status, timeToBeAdded, color){
   let sts = document.querySelector(".info .container #status")
-  sts.innerHTML = responseString
+  let timeToBeAddded = document.querySelector(".info .container #time-to-be-added")
+  sts.innerHTML = status
   sts.style.color = color
-  return 1 , 2
+  setTimeout(() => {
+    timeToBeAddded.innerHTML = timeToBeAdded
+    timeToBeAddded.style.color = color
+  }, 5000);
 }
 
 function slowDown(id, vehicleType, direction, prevVehicleId, remainingTime, trafficPassed) {
@@ -346,28 +350,10 @@ function animateVehicle(id, vehicleType, direction, prevVehicleId, duration, tra
 setTimeout(() => {
 createVehicle(1, 'up')
 }, 1500);
-// createVehicle(1, 'up')
-// createVehicle(1, 'up')
-// createVehicle(1, 'up')
-// createVehicle(1, 'up')
-// createVehicle(1, 'up')
-// createVehicle(1, 'up')
-// createVehicle(1, 'up')
 createVehicle(0)
 createVehicle(0)
 createVehicle(0)
 createVehicle(0)
-// createVehicle(0)
-// createVehicle(0)
-// createVehicle(0)
-// createVehicle(0)
-// createVehicle(0)
-// createVehicle(0)
-// createVehicle(0)
-// createVehicle(0)
-// createVehicle(0)
-// createVehicle(0)
-// createVehicle(1, 'up')
 
 createVehicle(0)
 setInterval(() => {
@@ -378,9 +364,3 @@ createVehicle(0)
 setInterval(() => {
   createVehicle(0)
 }, 15000)
-
-// setInterval(() => {
-//   let directions = ['up', 'right', 'down', 'left']
-  
-//   createVehicle(1, directions[Math.random * 3])
-// }, 15000);
