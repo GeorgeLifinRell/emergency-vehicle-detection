@@ -45,7 +45,7 @@ def home():
 
 @app.route('/audio')
 def audio_simulation():
-    return render_template('index.html')
+    return render_template('audio.html')
 
 @app.route('/video')
 def video_simulation():
