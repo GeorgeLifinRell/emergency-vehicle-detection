@@ -56,6 +56,8 @@ class Tracker:
 
 
 def video_analysis():
+    distance1 = 0
+    a_speed_kh1 = 0
     model = YOLO('models/yolo_v9.pt')
     cap = cv2.VideoCapture('video/highway.mp4')
 
@@ -125,8 +127,6 @@ def video_analysis():
             #         cv2.circle(frame, (cx, cy), 4, (0, 0, 255), -1)
             #         cv2.putText(frame, str(id), (cx, cy), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 255), 2)
             #         counter_up.add(id)  # Add ID to set
-
-
             if red_line_y<(cy+offset) and red_line_y > (cy-offset):
                 down[id]=time.time()   # current time when vehichle touch the first line
             if id in down:
@@ -190,5 +190,5 @@ def video_analysis():
             # break
 
     cap.release()
-
     cv2.destroyAllWindows()
+    return distance1, a_speed_kh1

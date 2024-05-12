@@ -49,7 +49,6 @@ def audio_simulation():
 
 @app.route('/video')
 def video_simulation():
-    video_analysis()
     return render_template('index.html')
 
 @app.route('/ambulance', methods=['GET', 'POST'])
@@ -61,8 +60,15 @@ def ambulance_generated():
     else:
         print("Model not loaded!")
     print(emergency_vehicle_detected)
-    time_to_be_added = 10
-    # emergency_vehicle_detected = 'Emergency'
+    # TODO: uncomment after development
+    # time_to_be_added = 10
+    # speed, distance = video_analysis()
+    # if speed < 30 and distance < 20:
+    #     time_to_be_added = 10
+    # elif speed < 50 and distance < 50:
+    #     time_to_be_added = 20
+    # else:
+    #     time_to_be_added = 30
     return jsonify({'emergency_vehicle_detected': emergency_vehicle_detected,
                     'time_to_be_added': time_to_be_added})
 
