@@ -73,19 +73,22 @@ async function createVehicle(mode, option1) {
   img.style.transform = transform
   trackElem.appendChild(img)
 
-  let duration = 15000 + vehicleType * 0.2 * 2000
+  let duration = 15000 + 1 * 0.2 * 2000
   animateVehicle(img.id, vehicleType, direction, prevVehicle[trackId], duration, trafficPassed)
   prevVehicle[trackId] = img.id
 
   if (mode==1){
     let detected = false
-    await fetch('/ambulance')
-    .then(async (res) => await res.json().then((data) => {
-      console.log(data)
-      setTimeout(() => {
-        changeDetectionStatus(data.emergency_vehicle_detected, data.time_to_be_added, 'green')
-      }, 3000);
-    }))
+    // await fetch('/ambulance')
+    // .then(async (res) => await res.json().then((data) => {
+    //   console.log(data)
+    //   setTimeout(() => {
+    //     changeDetectionStatus(data.emergency_vehicle_detected, data.time_to_be_added, 'green')
+    //   }, 3000);
+    // }));
+    setTimeout(() => { changeDetectionStatus(
+      "EMERGENCY", 10, "red"
+    ) }, 3000);
   }
 }
 
@@ -97,7 +100,7 @@ function changeDetectionStatus(status, timeToBeAdded, color){
   setTimeout(() => {
     timeToBeAddded.innerHTML = timeToBeAdded
     timeToBeAddded.style.color = color
-  }, 5000);
+  }, 10);
 }
 
 function slowDown(id, vehicleType, direction, prevVehicleId, remainingTime, trafficPassed) {

@@ -49,7 +49,7 @@ def audio_simulation():
 
 @app.route('/video')
 def video_simulation():
-    return render_template('index.html')
+    return render_template('video.html')
 
 @app.route('/ambulance', methods=['GET', 'POST'])
 def ambulance_generated():
